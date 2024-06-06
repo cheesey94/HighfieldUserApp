@@ -1,0 +1,52 @@
+<div class="container">
+  <h1>User Information</h1>
+
+  <div>
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <button ngbNavLink>Top Colours</button>
+        <ng-template ngbNavContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Colour</th>
+                <th scope="col">Colour Frequency</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let colour of topColours">
+                <td>{{ colour.colour }}</td>
+                <td>{{ colour.count }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <button ngbNavLink>Show Ages Plus 20</button>
+        <ng-template ngbNavContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">User ID</th>
+                <th scope="col">Original Age</th>
+                <th scope="col">Age Plus Twenty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let age of agesPlusTwenty">
+                <td>{{ age.userId }}</td>
+                <td>{{ age.originalAge }}</td>
+                <td>{{ age.agePlusTwenty }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+  <div [ngbNavOutlet]="nav"></div>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+</div>
