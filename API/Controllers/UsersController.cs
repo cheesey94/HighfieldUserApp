@@ -2,8 +2,6 @@ using API.Models;
 using API.Services;
 using API.Utilities;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Text.Json;
 
 namespace API.Controllers
 {
@@ -40,24 +38,6 @@ namespace API.Controllers
                     
                 });
 
-            //usersResult.Match(WhenOk, WhenError);
-
-            //async void WhenOk(UserDataResult userDataResult)
-            //{
-            //    switch (userDataResult)
-            //    {
-            //        case UserInfoSuccessResult userInfoSuccessResult:
-            //            userList = userInfoSuccessResult.Users.ToList();
-            //            break;
-            //        case UserDataFailureResult userDataFailureResult:
-            //            // hopefully shouldnt hit
-            //            break;
-            //    }
-            //}
-            //async void WhenError(string errorMessage)
-            //{
-                
-            //}
             return Ok(userList);
         }
         [HttpGet("top-colours")]
