@@ -71,7 +71,9 @@ namespace API.Services
 
                         users.Add(user);
 
-                        var agePlusTwenty = CalculateAge(userDto.Dob) + 20;
+                        var originalAge = CalculateAge(userDto.Dob);
+                        var agePlusTwenty = originalAge + 20;
+
                         userAgePlusTwenty.Add(new UserAgePlusTwenty
                         {
                             UserId = userDto.Id,
@@ -85,7 +87,7 @@ namespace API.Services
                             Count = 1
                         });
                     }
-                    var colourFrequency = userTopColours
+                    var userTopColourFrequency = userTopColours
                         .GroupBy(c => c.Colour)
                         .Select(g => new UserTopColours
                         {
@@ -95,7 +97,7 @@ namespace API.Services
                         .OrderByDescending(c => c.Count)
                         .ThenBy(c => c.Colour);
 
-                    return new UserInfoSuccessResult(users, userAgePlusTwenty, colourFrequency);
+                    return new UserInfoSuccessResult(users, userAgePlusTwenty, userTopColourFrequency);
                 }
                 else
                 {
@@ -107,7 +109,7 @@ namespace API.Services
                 return new UserDataFailureResult();
             }
         }
-        private int CalculateAge(DateTime dob)
+        private static int CalculateAge(DateTime dob)
         {
             var today = DateTime.Today;
             var age = today.Year - dob.Year;
